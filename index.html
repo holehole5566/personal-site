@@ -4,97 +4,285 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Po-Yen Chen</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👋</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥜</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#fafafa;color:#333;line-height:1.6}
-  .container{max-width:600px;margin:0 auto;padding:48px 24px}
+  :root {
+    --bg: #f6f3ee;
+    --text: #2c2825;
+    --muted: #8a8279;
+    --faint: #c9c2b8;
+    --accent: #b85c38;
+    --card-bg: #fffdf9;
+    --card-border: #e8e3db;
+  }
 
-  h1{font-size:1.8rem;font-weight:700;margin-bottom:4px}
-  .location{color:#888;font-size:.9rem;margin-bottom:16px}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  .links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:40px}
-  .links a{color:#555;text-decoration:none;font-size:.85rem;border-bottom:1px solid #ddd;padding-bottom:1px;transition:color .2s,border-color .2s}
-  .links a:hover{color:#111;border-color:#111}
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
 
-  section{margin-bottom:36px}
-  h2{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:#aaa;margin-bottom:16px}
+  .page {
+    max-width: 540px;
+    margin: 0 auto;
+    padding: clamp(48px, 10vw, 96px) 24px 64px;
+  }
 
-  .item{margin-bottom:20px}
-  .item .role{font-weight:600;font-size:.95rem}
-  .item .company{color:#666;font-size:.85rem}
-  .item .period{color:#aaa;font-size:.8rem}
+  /* --- Header --- */
+  .header { margin-bottom: 56px; }
 
-  .project{display:block;background:#fff;border:1px solid #eee;border-radius:10px;padding:18px;margin-bottom:10px;text-decoration:none;color:#333;transition:border-color .2s,box-shadow .2s}
-  .project:hover{border-color:#ccc;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-  .project .name{font-weight:600;font-size:.95rem;margin-bottom:3px}
-  .project .desc{font-size:.8rem;color:#888}
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 2.6rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
 
-  footer{margin-top:48px;padding-top:20px;border-top:1px solid #eee;font-size:.75rem;color:#bbb;text-align:center}
+  .header .where {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .nav {
+    display: flex;
+    gap: 20px;
+  }
+
+  .nav a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.25s;
+  }
+
+  .nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+
+  .nav a:hover { color: var(--accent); }
+  .nav a:hover::after { width: 100%; }
+
+  /* --- Sections --- */
+  section { margin-bottom: 48px; }
+
+  .section-label {
+    font-size: 0.68rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--faint);
+    margin-bottom: 20px;
+  }
+
+  /* --- Timeline --- */
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .timeline-item:first-child { padding-top: 0; }
+  .timeline-item:last-child { border-bottom: none; }
+
+  .timeline-item .role {
+    font-weight: 500;
+    font-size: 0.92rem;
+  }
+
+  .timeline-item .at {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .timeline-item .when {
+    font-size: 0.78rem;
+    color: var(--faint);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* --- Projects --- */
+  .project-card {
+    display: block;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(44, 40, 37, 0.06);
+  }
+
+  .project-card .pname {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+
+  .project-card .pdesc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .project-card .arrow {
+    float: right;
+    color: var(--faint);
+    font-size: 0.85rem;
+    transition: transform 0.2s, color 0.2s;
+  }
+
+  .project-card:hover .arrow {
+    transform: translateX(3px);
+    color: var(--accent);
+  }
+
+  /* --- Footer --- */
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--card-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.72rem;
+    color: var(--faint);
+  }
+
+  /* --- Entrance --- */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .header { animation: rise 0.6s ease both; }
+  section:nth-of-type(1) { animation: rise 0.6s 0.1s ease both; }
+  section:nth-of-type(2) { animation: rise 0.6s 0.2s ease both; }
+  section:nth-of-type(3) { animation: rise 0.6s 0.3s ease both; }
+  footer { animation: rise 0.6s 0.4s ease both; }
+
+  /* --- Mobile --- */
+  @media (max-width: 480px) {
+    .timeline-item {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+    .timeline-item .when {
+      text-align: left;
+    }
+  }
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>Po-Yen Chen</h1>
-  <p class="location">Taipei, Taiwan</p>
+<div class="page">
 
-  <div class="links">
-    <a href="mailto:hole.chenn@gmail.com">Email</a>
-    <a href="https://linkedin.com/in/poyenchen5566" target="_blank">LinkedIn</a>
-    <a href="https://github.com/holehole5566" target="_blank">GitHub</a>
+  <div class="header">
+    <h1>Po-Yen Chen</h1>
+    <p class="where">Taipei, Taiwan</p>
+    <nav class="nav">
+      <a href="mailto:hole.chenn@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/poyenchen5566" target="_blank">LinkedIn</a>
+      <a href="https://github.com/holehole5566" target="_blank">GitHub</a>
+    </nav>
   </div>
 
   <section>
-    <h2>Experience</h2>
-    <div class="item">
-      <div class="role">Cloud Support Engineer</div>
-      <div class="company">Amazon Web Services</div>
-      <div class="period">Apr 2024 — Present</div>
+    <div class="section-label">Experience</div>
+    <div class="timeline-item">
+      <div>
+        <div class="role">Cloud Support Engineer</div>
+        <div class="at">Amazon Web Services</div>
+      </div>
+      <div class="when">2024 —</div>
     </div>
-    <div class="item">
-      <div class="role">Risk Analyst Intern</div>
-      <div class="company">Binance</div>
-      <div class="period">Oct 2023 — Apr 2024</div>
+    <div class="timeline-item">
+      <div>
+        <div class="role">Risk Analyst Intern</div>
+        <div class="at">Binance</div>
+      </div>
+      <div class="when">2023 — 2024</div>
     </div>
-    <div class="item">
-      <div class="role">Software Engineer in Test Intern</div>
-      <div class="company">Trend Micro</div>
-      <div class="period">Oct 2022 — Oct 2023</div>
+    <div class="timeline-item">
+      <div>
+        <div class="role">Software Engineer in Test Intern</div>
+        <div class="at">Trend Micro</div>
+      </div>
+      <div class="when">2022 — 2023</div>
     </div>
-    <div class="item">
-      <div class="role">Research Assistant</div>
-      <div class="company">National Taiwan University of Science and Technology</div>
-      <div class="period">Sep 2022 — Jun 2023</div>
+    <div class="timeline-item">
+      <div>
+        <div class="role">Research Assistant</div>
+        <div class="at">National Taiwan University of Science and Technology</div>
+      </div>
+      <div class="when">2022 — 2023</div>
     </div>
-    <div class="item">
-      <div class="role">IT Engineer</div>
-      <div class="company">Taishin International Commercial Bank</div>
-      <div class="period">Aug 2021 — Apr 2022</div>
+    <div class="timeline-item">
+      <div>
+        <div class="role">IT Engineer</div>
+        <div class="at">Taishin International Commercial Bank</div>
+      </div>
+      <div class="when">2021 — 2022</div>
     </div>
   </section>
 
   <section>
-    <h2>Education</h2>
-    <div class="item">
-      <div class="role">B.S. Information Management and Finance</div>
-      <div class="company">National Chiao Tung University</div>
-      <div class="period">Hsinchu, Taiwan · 2020</div>
+    <div class="section-label">Education</div>
+    <div class="timeline-item">
+      <div>
+        <div class="role">B.S. Information Management & Finance</div>
+        <div class="at">National Chiao Tung University</div>
+      </div>
+      <div class="when">2020</div>
     </div>
   </section>
 
   <section>
-    <h2>Projects</h2>
-    <a class="project" href="https://pebble.pe4nut.com" target="_blank">
-      <div class="name">Pebble</div>
-      <div class="desc">A couple app for sharing moments. Available on the App Store and Google Play.</div>
+    <div class="section-label">Projects</div>
+    <a class="project-card" href="https://pebble.pe4nut.com" target="_blank">
+      <span class="arrow">→</span>
+      <div class="pname">Pebble</div>
+      <div class="pdesc">A couple app for sharing moments. Available on the App Store and Google Play.</div>
     </a>
-    <a class="project" href="https://demo.pe4nut.com/home" target="_blank">
-      <div class="name">System Design Demos</div>
-      <div class="desc">Hands-on distributed system projects — URL shortener, web crawler, and more.</div>
+    <a class="project-card" href="https://demo.pe4nut.com/home" target="_blank">
+      <span class="arrow">→</span>
+      <div class="pname">System Design Demos</div>
+      <div class="pdesc">Hands-on distributed system projects — URL shortener, web crawler, and more.</div>
     </a>
   </section>
 
-  <footer>me.pe4nut.com</footer>
+  <footer>
+    <span>me.pe4nut.com</span>
+    <span>© 2026</span>
+  </footer>
+
 </div>
 </body>
 </html>
