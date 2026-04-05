@@ -6,188 +6,196 @@
 <title>Po-Yen Chen</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥜</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f6f3ee;
-    --text: #2c2825;
-    --muted: #8a8279;
-    --faint: #c9c2b8;
-    --accent: #b85c38;
-    --card-bg: #fffdf9;
-    --card-border: #e8e3db;
+    --bg: #fafafa;
+    --text: #1a1a1a;
+    --secondary: #555;
+    --tertiary: #999;
+    --border: #e5e5e5;
+    --accent: #1a1a1a;
+    --hover: #d4451a;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
+  html { font-size: 16px; }
+
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.65;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   .page {
-    max-width: 540px;
+    max-width: 600px;
     margin: 0 auto;
-    padding: clamp(48px, 10vw, 96px) 24px 64px;
+    padding: clamp(64px, 12vw, 120px) 24px 80px;
   }
 
   /* --- Header --- */
-  .header { margin-bottom: 56px; }
-
-  .header h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2rem, 5vw, 2.6rem);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    margin-bottom: 8px;
+  .header {
+    margin-bottom: 72px;
   }
 
-  .header .where {
-    font-size: 0.88rem;
-    color: var(--muted);
-    margin-bottom: 20px;
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5.5vw, 3rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .header .tagline {
+    font-size: 0.95rem;
+    color: var(--secondary);
+    margin-bottom: 24px;
+    max-width: 400px;
   }
 
   .nav {
     display: flex;
-    gap: 20px;
+    gap: 24px;
   }
 
   .nav a {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    color: var(--muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--tertiary);
     text-decoration: none;
-    position: relative;
-    transition: color 0.25s;
+    transition: color 0.2s;
   }
 
-  .nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--accent);
-    transition: width 0.3s ease;
+  .nav a:hover {
+    color: var(--hover);
   }
-
-  .nav a:hover { color: var(--accent); }
-  .nav a:hover::after { width: 100%; }
 
   /* --- Sections --- */
-  section { margin-bottom: 48px; }
+  section {
+    margin-bottom: 64px;
+  }
 
-  .section-label {
-    font-size: 0.68rem;
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
     font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--faint);
-    margin-bottom: 20px;
+    font-style: italic;
+    color: var(--text);
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 1.5px solid var(--text);
+    display: inline-block;
   }
 
   /* --- Timeline --- */
   .timeline-item {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 8px;
+    gap: 12px;
     align-items: baseline;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--card-border);
+    padding: 16px 0;
   }
 
-  .timeline-item:first-child { padding-top: 0; }
-  .timeline-item:last-child { border-bottom: none; }
+  .timeline-item + .timeline-item {
+    border-top: 1px solid var(--border);
+  }
 
   .timeline-item .role {
-    font-weight: 500;
-    font-size: 0.92rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: -0.01em;
   }
 
-  .timeline-item .at {
-    color: var(--muted);
+  .timeline-item .org {
     font-size: 0.82rem;
+    color: var(--secondary);
+    margin-top: 2px;
   }
 
   .timeline-item .when {
-    font-size: 0.78rem;
-    color: var(--faint);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--tertiary);
     text-align: right;
     white-space: nowrap;
+    letter-spacing: 0.02em;
   }
 
   /* --- Projects --- */
   .project-card {
     display: block;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 22px 24px;
-    margin-bottom: 10px;
+    padding: 24px 0;
     text-decoration: none;
     color: var(--text);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: opacity 0.2s;
+  }
+
+  .project-card + .project-card {
+    border-top: 1px solid var(--border);
   }
 
   .project-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(44, 40, 37, 0.06);
+    opacity: 0.65;
   }
 
   .project-card .pname {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.05rem;
-    font-weight: 400;
-    margin-bottom: 4px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: -0.01em;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .project-card .pname::after {
+    content: '↗';
+    font-size: 0.75rem;
+    color: var(--tertiary);
+    transition: transform 0.2s;
+  }
+
+  .project-card:hover .pname::after {
+    transform: translate(2px, -2px);
   }
 
   .project-card .pdesc {
-    font-size: 0.8rem;
-    color: var(--muted);
-    line-height: 1.55;
-  }
-
-  .project-card .arrow {
-    float: right;
-    color: var(--faint);
-    font-size: 0.85rem;
-    transition: transform 0.2s, color 0.2s;
-  }
-
-  .project-card:hover .arrow {
-    transform: translateX(3px);
-    color: var(--accent);
+    font-size: 0.82rem;
+    color: var(--secondary);
+    margin-top: 4px;
+    line-height: 1.5;
   }
 
   /* --- Footer --- */
   footer {
-    margin-top: 56px;
+    margin-top: 72px;
     padding-top: 24px;
-    border-top: 1px solid var(--card-border);
+    border-top: 1.5px solid var(--text);
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 0.72rem;
-    color: var(--faint);
+    color: var(--tertiary);
+    letter-spacing: 0.02em;
   }
 
-  /* --- Entrance --- */
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(16px); }
+  /* --- Entrance animation --- */
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .header { animation: rise 0.6s ease both; }
-  section:nth-of-type(1) { animation: rise 0.6s 0.1s ease both; }
-  section:nth-of-type(2) { animation: rise 0.6s 0.2s ease both; }
-  section:nth-of-type(3) { animation: rise 0.6s 0.3s ease both; }
-  footer { animation: rise 0.6s 0.4s ease both; }
+  .header { animation: fade-up 0.7s ease both; }
+  section:nth-of-type(1) { animation: fade-up 0.7s 0.08s ease both; }
+  section:nth-of-type(2) { animation: fade-up 0.7s 0.16s ease both; }
+  section:nth-of-type(3) { animation: fade-up 0.7s 0.24s ease both; }
+  footer { animation: fade-up 0.7s 0.32s ease both; }
 
   /* --- Mobile --- */
   @media (max-width: 480px) {
@@ -206,7 +214,7 @@
 
   <div class="header">
     <h1>Po-Yen Chen</h1>
-    <p class="where">Taipei, Taiwan</p>
+    <p class="tagline">Cloud engineer based in Taipei, Taiwan.</p>
     <nav class="nav">
       <a href="mailto:hole.chenn@gmail.com">Email</a>
       <a href="https://linkedin.com/in/poyenchen5566" target="_blank">LinkedIn</a>
@@ -215,64 +223,62 @@
   </div>
 
   <section>
-    <div class="section-label">Experience</div>
+    <div class="section-title">Experience</div>
     <div class="timeline-item">
       <div>
         <div class="role">Cloud Support Engineer</div>
-        <div class="at">Amazon Web Services</div>
+        <div class="org">Amazon Web Services</div>
       </div>
       <div class="when">2024 —</div>
     </div>
     <div class="timeline-item">
       <div>
         <div class="role">Risk Analyst Intern</div>
-        <div class="at">Binance</div>
+        <div class="org">Binance</div>
       </div>
       <div class="when">2023 — 2024</div>
     </div>
     <div class="timeline-item">
       <div>
         <div class="role">Software Engineer in Test Intern</div>
-        <div class="at">Trend Micro</div>
+        <div class="org">Trend Micro</div>
       </div>
       <div class="when">2022 — 2023</div>
     </div>
     <div class="timeline-item">
       <div>
         <div class="role">Research Assistant</div>
-        <div class="at">National Taiwan University of Science and Technology</div>
+        <div class="org">National Taiwan University of Science and Technology</div>
       </div>
       <div class="when">2022 — 2023</div>
     </div>
     <div class="timeline-item">
       <div>
         <div class="role">IT Engineer</div>
-        <div class="at">Taishin International Commercial Bank</div>
+        <div class="org">Taishin International Commercial Bank</div>
       </div>
       <div class="when">2021 — 2022</div>
     </div>
   </section>
 
   <section>
-    <div class="section-label">Education</div>
+    <div class="section-title">Education</div>
     <div class="timeline-item">
       <div>
         <div class="role">B.S. Information Management & Finance</div>
-        <div class="at">National Chiao Tung University</div>
+        <div class="org">National Chiao Tung University</div>
       </div>
       <div class="when">2020</div>
     </div>
   </section>
 
   <section>
-    <div class="section-label">Projects</div>
+    <div class="section-title">Projects</div>
     <a class="project-card" href="https://pebble.pe4nut.com" target="_blank">
-      <span class="arrow">→</span>
       <div class="pname">Pebble</div>
       <div class="pdesc">A couple app for sharing moments. Available on the App Store and Google Play.</div>
     </a>
     <a class="project-card" href="https://demo.pe4nut.com/home" target="_blank">
-      <span class="arrow">→</span>
       <div class="pname">System Design Demos</div>
       <div class="pdesc">Hands-on distributed system projects — URL shortener, web crawler, and more.</div>
     </a>
