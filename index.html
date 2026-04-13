@@ -172,6 +172,31 @@
     line-height: 1.5;
   }
 
+  /* --- Featured project --- */
+  .project-card.featured {
+    padding: 24px;
+    margin: 0 -24px 8px;
+    border: 1.5px solid var(--text);
+    border-radius: 6px;
+  }
+
+  .project-card.featured + .project-card {
+    border-top: none;
+  }
+
+  .project-card.featured .pname {
+    font-size: 1rem;
+  }
+
+  .project-card.featured .badge {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--tertiary);
+    margin-bottom: 8px;
+  }
+
   /* --- Footer --- */
   footer {
     margin-top: 72px;
@@ -274,17 +299,18 @@
 
   <section>
     <div class="section-title">Projects</div>
-    <a class="project-card" href="https://ktv.pe4nut.com/app/" target="_blank">
-      <div class="pname">KTV</div>
-      <div class="pdesc">A web-based karaoke app with real-time pitch detection and lyrics sync.</div>
-    </a>
-    <a class="project-card" href="https://pebble.pe4nut.com" target="_blank">
+    <a class="project-card featured" href="https://pebble.pe4nut.com" target="_blank">
+      <div class="badge">Featured</div>
       <div class="pname">Pebble</div>
-      <div class="pdesc">A couple app for sharing moments. Available on the App Store and Google Play.</div>
+      <div class="pdesc">A shared notes & read-later app for couples. Available on the App Store and Google Play.</div>
     </a>
     <a class="project-card" href="https://demo.pe4nut.com/home" target="_blank">
       <div class="pname">System Design Demos</div>
       <div class="pdesc">Hands-on distributed system projects — URL shortener, web crawler, and more.</div>
+    </a>
+    <a class="project-card" href="https://ktv.pe4nut.com/app/" target="_blank">
+      <div class="pname">KTV</div>
+      <div class="pdesc">A web-based karaoke app with real-time pitch detection and lyrics sync.</div>
     </a>
   </section>
 
