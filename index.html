@@ -3,324 +3,441 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Po-Yen Chen — an engineer interested in data systems and practical software.">
 <title>Po-Yen Chen</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥜</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #fafafa;
+    --surface: #f3f1ed;
     --text: #1a1a1a;
-    --secondary: #555;
-    --tertiary: #999;
-    --border: #e5e5e5;
-    --accent: #1a1a1a;
-    --hover: #d4451a;
+    --secondary: #5f5f5f;
+    --tertiary: #969696;
+    --border: #dedede;
+    --accent: #d4451a;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { font-size: 16px; }
+  html { font-size: 16px; scroll-behavior: smooth; }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
+
+  a { color: inherit; }
+  button { font: inherit; }
+  .lang-zh { display: none; }
+  body.zh .lang-en { display: none; }
+  body.zh .lang-zh { display: inline; }
+  body.zh p.lang-zh, body.zh div.lang-zh { display: block; }
 
   .page {
-    max-width: 600px;
+    width: min(1120px, calc(100% - 48px));
     margin: 0 auto;
-    padding: clamp(64px, 12vw, 120px) 24px 80px;
+    padding: clamp(48px, 7vw, 88px) 0 48px;
+    display: grid;
+    grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.55fr);
+    gap: clamp(56px, 8vw, 120px);
+    align-items: start;
   }
 
-  /* --- Header --- */
-  .header {
-    margin-bottom: 72px;
+  /* --- Profile --- */
+  .profile {
+    position: sticky;
+    top: 64px;
+    min-height: calc(100vh - 112px);
+    display: flex;
+    flex-direction: column;
   }
 
-  .header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.2rem, 5.5vw, 3rem);
+  .eyebrow {
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', 'Noto Sans TC', serif;
+    font-size: clamp(2.6rem, 5vw, 4.3rem);
     font-weight: 500;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin-bottom: 12px;
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+    margin-bottom: 28px;
   }
 
-  .header .tagline {
-    font-size: 0.95rem;
+  .headline {
+    font-family: 'Playfair Display', 'Noto Sans TC', serif;
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+    max-width: 360px;
+  }
+
+  .bio {
     color: var(--secondary);
-    margin-bottom: 24px;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    max-width: 360px;
   }
 
   .nav {
     display: flex;
-    gap: 24px;
+    flex-wrap: wrap;
+    gap: 12px 22px;
+    margin-top: 28px;
+  }
+
+  .nav a, .language-toggle {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+    text-decoration: none;
   }
 
   .nav a {
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    border-bottom: 1px solid var(--text);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .nav a:hover { color: var(--accent); border-color: var(--accent); }
+
+  .language-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+    background: transparent;
     color: var(--tertiary);
-    text-decoration: none;
+    cursor: pointer;
     transition: color 0.2s;
   }
 
-  .nav a:hover {
-    color: var(--hover);
+  .language-toggle:hover { color: var(--accent); }
+
+  .education {
+    margin-top: auto;
+    padding-top: 64px;
   }
 
-  /* --- Sections --- */
-  section {
-    margin-bottom: 64px;
+  .mini-label {
+    color: var(--tertiary);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
   }
 
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
+  .education .degree { font-size: 0.78rem; font-weight: 600; }
+  .education .school { color: var(--secondary); font-size: 0.76rem; margin-top: 2px; }
+
+  /* --- Main content --- */
+  main { min-width: 0; }
+  section + section { margin-top: 72px; }
+
+  .section-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 14px;
+    margin-bottom: 12px;
+    border-bottom: 1.5px solid var(--text);
+  }
+
+  .section-heading h2 {
+    font-family: 'Playfair Display', 'Noto Sans TC', serif;
+    font-size: 1.3rem;
     font-weight: 500;
     font-style: italic;
-    color: var(--text);
-    margin-bottom: 28px;
-    padding-bottom: 12px;
-    border-bottom: 1.5px solid var(--text);
-    display: inline-block;
   }
 
-  /* --- Timeline --- */
-  .timeline-item {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 12px;
-    align-items: baseline;
-    padding: 16px 0;
-  }
-
-  .timeline-item + .timeline-item {
-    border-top: 1px solid var(--border);
-  }
-
-  .timeline-item .role {
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: -0.01em;
-  }
-
-  .timeline-item .org {
-    font-size: 0.82rem;
-    color: var(--secondary);
-    margin-top: 2px;
-  }
-
-  .timeline-item .job-desc {
-    max-width: 460px;
-    margin-top: 8px;
-    font-size: 0.8rem;
-    line-height: 1.55;
-    color: var(--secondary);
-  }
-
-  .timeline-item .when {
-    font-size: 0.75rem;
-    font-weight: 500;
+  .section-heading span {
     color: var(--tertiary);
-    text-align: right;
-    white-space: nowrap;
-    letter-spacing: 0.02em;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   /* --- Projects --- */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
   .project-card {
-    display: block;
-    padding: 24px 0;
-    text-decoration: none;
+    min-height: 190px;
+    padding: 24px;
+    background: var(--bg);
     color: var(--text);
-    transition: opacity 0.2s;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.25s, color 0.25s;
   }
 
-  .project-card + .project-card {
-    border-top: 1px solid var(--border);
+  .project-card.featured {
+    grid-column: 1 / -1;
+    min-height: 225px;
+    background: var(--surface);
   }
 
-  .project-card:hover {
-    opacity: 0.65;
-  }
+  .project-card:hover { background: var(--text); color: var(--bg); }
 
-  .project-card .pname {
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: -0.01em;
-    display: inline-flex;
+  .project-top {
+    display: flex;
     align-items: center;
-    gap: 6px;
+    justify-content: space-between;
+    gap: 16px;
   }
 
-  .project-card .pname::after {
-    content: '↗';
-    font-size: 0.75rem;
+  .project-number {
     color: var(--tertiary);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+  }
+
+  .project-arrow {
+    font-size: 1.1rem;
     transition: transform 0.2s;
   }
 
-  .project-card:hover .pname::after {
-    transform: translate(2px, -2px);
+  .project-card:hover .project-arrow { transform: translate(3px, -3px); }
+
+  .project-name {
+    font-family: 'Playfair Display', 'Noto Sans TC', serif;
+    font-size: 1.45rem;
+    font-weight: 500;
+    margin-top: auto;
   }
 
-  .project-card .pdesc {
-    font-size: 0.82rem;
+  .featured .project-name { font-size: clamp(2rem, 4vw, 3rem); }
+
+  .project-desc {
     color: var(--secondary);
-    margin-top: 4px;
-    line-height: 1.5;
+    font-size: 0.8rem;
+    line-height: 1.55;
+    margin-top: 8px;
+    max-width: 540px;
+    transition: color 0.25s;
   }
 
-  /* --- Featured project --- */
-  .project-card.featured {
-    padding-left: 20px;
-    border-left: 3px solid var(--hover);
+  .project-card:hover .project-desc { color: #c7c7c7; }
+
+  /* --- Experience --- */
+  .experience-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px 28px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
   }
 
-  .project-card.featured .pname {
-    font-size: 1rem;
+  .role { font-size: 0.88rem; font-weight: 600; }
+  .org { color: var(--secondary); font-size: 0.79rem; margin-top: 1px; }
+  .when {
+    color: var(--tertiary);
+    font-size: 0.72rem;
+    font-weight: 500;
+    white-space: nowrap;
+    text-align: right;
   }
 
-  .project-card.featured .badge {
-    display: none;
+  .job-desc {
+    grid-column: 1 / -1;
+    color: var(--secondary);
+    font-size: 0.77rem;
+    line-height: 1.55;
+    max-width: 650px;
   }
 
-  /* --- Footer --- */
   footer {
     margin-top: 72px;
-    padding-top: 24px;
-    border-top: 1.5px solid var(--text);
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    font-size: 0.72rem;
+    padding-top: 16px;
+    border-top: 1.5px solid var(--text);
     color: var(--tertiary);
-    letter-spacing: 0.02em;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
   }
 
-  /* --- Entrance animation --- */
   @keyframes fade-up {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(14px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .header { animation: fade-up 0.7s ease both; }
-  section:nth-of-type(1) { animation: fade-up 0.7s 0.08s ease both; }
-  section:nth-of-type(2) { animation: fade-up 0.7s 0.16s ease both; }
-  section:nth-of-type(3) { animation: fade-up 0.7s 0.24s ease both; }
-  footer { animation: fade-up 0.7s 0.32s ease both; }
+  .profile { animation: fade-up 0.65s ease both; }
+  main { animation: fade-up 0.65s 0.1s ease both; }
 
-  /* --- Mobile --- */
-  @media (max-width: 480px) {
-    .timeline-item {
+  @media (max-width: 760px) {
+    .page {
+      width: min(100% - 40px, 600px);
       grid-template-columns: 1fr;
-      gap: 2px;
+      gap: 64px;
+      padding-top: 40px;
     }
-    .timeline-item .when {
-      text-align: left;
-    }
+    .profile { position: relative; top: auto; min-height: auto; }
+    .language-toggle { top: 4px; }
+    h1 { padding-right: 64px; }
+    .education { margin-top: 48px; padding-top: 0; }
+    section + section { margin-top: 56px; }
+  }
+
+  @media (max-width: 480px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: auto; }
+    .project-card { min-height: 175px; padding: 20px; }
+    .experience-item { grid-template-columns: 1fr; gap: 3px; }
+    .when { text-align: left; }
+    .job-desc { margin-top: 8px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
   }
 </style>
 </head>
 <body>
 <div class="page">
+  <aside class="profile">
+    <button class="language-toggle" type="button" aria-label="切換至中文版">
+      <span class="lang-en">中文</span><span class="lang-zh">English</span>
+    </button>
 
-  <div class="header">
-    <h1>Po-Yen Chen</h1>
-    <p class="tagline">Engineer with customer-facing experience at Amazon Web Services, specializing in data streaming and analytics systems. Experienced in bridging infrastructure and user needs, with hands-on experience building and shipping end-to-end projects. Interested in roles that combine engineering and product thinking.</p>
-    <nav class="nav">
+    <div class="eyebrow">
+      <span class="lang-en">Engineer</span><span class="lang-zh">工程師</span>
+    </div>
+    <h1>Po-Yen<br>Chen</h1>
+    <p class="headline lang-en">Interested in data systems and practical software.</p>
+    <p class="headline lang-zh">對資料系統與實用軟體保持好奇。</p>
+    <p class="bio lang-en">I previously supported customers working with data streaming and analytics at AWS. Outside of work, I learn by building small tools around everyday problems.</p>
+    <p class="bio lang-zh">過去曾在 AWS 協助客戶處理資料串流與分析相關問題。工作之外，我也會從日常需求出發做些小工具，邊做邊學。</p>
+
+    <nav class="nav" aria-label="Contact links">
       <a href="mailto:contact@pe4nut.com">Email</a>
-      <a href="https://linkedin.com/in/poyenchen5566" target="_blank">LinkedIn</a>
-      <a href="https://github.com/holehole5566" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/poyenchen5566" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://github.com/holehole5566" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
-  </div>
 
-  <section>
-    <div class="section-title">Experience</div>
-    <div class="timeline-item">
-      <div>
-        <div class="role">Cloud Support Engineer</div>
-        <div class="org">Amazon Web Services</div>
-        <p class="job-desc">Supported customers running data streaming and analytics workloads on AWS, translating complex infrastructure issues into practical solutions and guidance.</p>
-      </div>
-      <div class="when">2024 — 2026</div>
+    <div class="education">
+      <div class="mini-label"><span class="lang-en">Education</span><span class="lang-zh">學歷</span></div>
+      <div class="degree lang-en">B.S. Information Management &amp; Finance</div>
+      <div class="degree lang-zh">資訊管理與財務金融學士</div>
+      <div class="school lang-en">National Chiao Tung University · 2020</div>
+      <div class="school lang-zh">國立交通大學 · 2020</div>
     </div>
-    <div class="timeline-item">
-      <div>
-        <div class="role">Risk Analyst Intern</div>
-        <div class="org">Binance</div>
-        <p class="job-desc">Analyzed risk signals and investigated suspicious activity, helping the team identify emerging patterns and strengthen operational controls.</p>
-      </div>
-      <div class="when">2023 — 2024</div>
-    </div>
-    <div class="timeline-item">
-      <div>
-        <div class="role">Software Engineer in Test Intern</div>
-        <div class="org">Trend Micro</div>
-        <p class="job-desc">Developed and maintained software tests for security products, working with engineers to identify regressions and improve release quality.</p>
-      </div>
-      <div class="when">2022 — 2023</div>
-    </div>
-    <div class="timeline-item">
-      <div>
-        <div class="role">Research Assistant</div>
-        <div class="org">National Taiwan University of Science and Technology</div>
-        <p class="job-desc">Supported academic research through software implementation, experimentation, and data analysis, turning research questions into reproducible technical work.</p>
-      </div>
-      <div class="when">2022 — 2023</div>
-    </div>
-    <div class="timeline-item">
-      <div>
-        <div class="role">IT Engineer</div>
-        <div class="org">Taishin International Commercial Bank</div>
-        <p class="job-desc">Supported internal banking systems by troubleshooting technical issues and helping maintain reliable day-to-day IT operations.</p>
-      </div>
-      <div class="when">2021 — 2022</div>
-    </div>
-  </section>
+  </aside>
 
-  <section>
-    <div class="section-title">Education</div>
-    <div class="timeline-item">
-      <div>
-        <div class="role">B.S. Information Management & Finance</div>
-        <div class="org">National Chiao Tung University</div>
+  <main>
+    <section aria-labelledby="experience-title">
+      <div class="section-heading">
+        <h2 id="experience-title"><span class="lang-en">Experience</span><span class="lang-zh">經歷</span></h2>
+        <span>2021 — 2026</span>
       </div>
-      <div class="when">2020</div>
-    </div>
-  </section>
 
-  <section>
-    <div class="section-title">Projects</div>
-    <a class="project-card featured" href="https://pebble.pe4nut.com" target="_blank">
-      <div class="badge">Featured</div>
-      <div class="pname">Pebble</div>
-      <div class="pdesc">A shared notes & read-later app for couples. Available on the App Store and Google Play.</div>
-    </a>
-    <a class="project-card" href="https://teacher-helper.pe4nut.com" target="_blank">
-      <div class="pname">Teacher Helper</div>
-      <div class="pdesc">A desktop app that automates student duty rotation, lunch assignments, and schedule display. Adopted by teachers at a public junior high school. Built with Wails (Go + Svelte).</div>
-    </a>
-    <a class="project-card" href="https://scoreprint.pe4nut.com/" target="_blank">
-      <div class="pname">ScorePrint</div>
-      <div class="pdesc">A tool that parses school system PDFs into printable student score cards, with auto-calculated ranking changes.</div>
-    </a>
+      <article class="experience-item">
+        <div><div class="role lang-en">Cloud Support Engineer</div><div class="role lang-zh">雲端技術支援工程師</div><div class="org">Amazon Web Services</div></div>
+        <div class="when">2024 — 2026</div>
+        <p class="job-desc lang-en">Supported customers running data streaming and analytics workloads, turning complex infrastructure issues into practical solutions.</p>
+        <p class="job-desc lang-zh">協助客戶維運資料串流與分析工作負載，將複雜的基礎架構問題轉化為可落地的解決方案。</p>
+      </article>
 
-  </section>
+      <article class="experience-item">
+        <div><div class="role lang-en">Risk Analyst Intern</div><div class="role lang-zh">風險分析實習生</div><div class="org">Binance</div></div>
+        <div class="when">2023 — 2024</div>
+        <p class="job-desc lang-en">Analyzed risk signals and investigated suspicious activity to identify emerging patterns.</p>
+        <p class="job-desc lang-zh">分析風險訊號並調查可疑活動，協助團隊識別新興模式並強化營運控管。</p>
+      </article>
 
-  <footer>
-    <span>me.pe4nut.com</span>
-    <span>© 2026</span>
-  </footer>
+      <article class="experience-item">
+        <div><div class="role lang-en">Software Engineer in Test Intern</div><div class="role lang-zh">軟體測試工程實習生</div><div class="org">Trend Micro</div></div>
+        <div class="when">2022 — 2023</div>
+        <p class="job-desc lang-en">Built and maintained software tests for security products, identifying regressions and improving release quality.</p>
+        <p class="job-desc lang-zh">為資安產品開發與維護軟體測試，協助發現回歸問題並提升版本品質。</p>
+      </article>
 
+      <article class="experience-item">
+        <div><div class="role lang-en">Research Assistant</div><div class="role lang-zh">研究助理</div><div class="org lang-en">National Taiwan University of Science and Technology</div><div class="org lang-zh">國立臺灣科技大學</div></div>
+        <div class="when">2022 — 2023</div>
+        <p class="job-desc lang-en">Turned research questions into reproducible software, experiments, and data analysis.</p>
+        <p class="job-desc lang-zh">透過軟體實作、實驗與資料分析，將研究問題轉化為可重現的技術成果。</p>
+      </article>
+
+      <article class="experience-item">
+        <div><div class="role lang-en">IT Engineer</div><div class="role lang-zh">資訊工程師</div><div class="org lang-en">Taishin International Commercial Bank</div><div class="org lang-zh">台新國際商業銀行</div></div>
+        <div class="when">2021 — 2022</div>
+        <p class="job-desc lang-en">Troubleshot internal banking systems and helped maintain reliable day-to-day IT operations.</p>
+        <p class="job-desc lang-zh">排除內部銀行系統問題，協助維持日常資訊服務穩定運作。</p>
+      </article>
+    </section>
+
+    <section aria-labelledby="projects-title">
+      <div class="section-heading">
+        <h2 id="projects-title"><span class="lang-en">Selected Projects</span><span class="lang-zh">精選專案</span></h2>
+        <span>01 — 03</span>
+      </div>
+      <div class="projects-grid">
+        <a class="project-card featured" href="https://pebble.pe4nut.com" target="_blank" rel="noopener noreferrer">
+          <div class="project-top"><span class="project-number">01 · FEATURED</span><span class="project-arrow">↗</span></div>
+          <div class="project-name">Pebble</div>
+          <p class="project-desc lang-en">A shared notes and read-later app for couples. Available on the App Store and Google Play.</p>
+          <p class="project-desc lang-zh">為伴侶打造的共享筆記與稍後閱讀 App，已上架 App Store 與 Google Play。</p>
+        </a>
+        <a class="project-card" href="https://teacher-helper.pe4nut.com" target="_blank" rel="noopener noreferrer">
+          <div class="project-top"><span class="project-number">02</span><span class="project-arrow">↗</span></div>
+          <div class="project-name">Teacher Helper</div>
+          <p class="project-desc lang-en">A desktop app that automates classroom duty rotation, lunch assignments, and schedules.</p>
+          <p class="project-desc lang-zh">自動安排學生值日、午餐工作與課表顯示的桌面應用程式，已由國中教師實際採用。</p>
+        </a>
+        <a class="project-card" href="https://scoreprint.pe4nut.com/" target="_blank" rel="noopener noreferrer">
+          <div class="project-top"><span class="project-number">03</span><span class="project-arrow">↗</span></div>
+          <div class="project-name">ScorePrint</div>
+          <p class="project-desc lang-en">A tool that turns school-system PDFs into printable score cards with ranking changes.</p>
+          <p class="project-desc lang-zh">將校務系統 PDF 轉換成可列印成績單，並自動計算排名變化的工具。</p>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <span>me.pe4nut.com</span>
+      <span>© 2026</span>
+    </footer>
+  </main>
 </div>
+
+<script>
+  const toggle = document.querySelector('.language-toggle');
+  const savedLanguage = localStorage.getItem('language');
+  const prefersChinese = navigator.language.toLowerCase().startsWith('zh');
+
+  function setLanguage(language) {
+    const isChinese = language === 'zh';
+    document.body.classList.toggle('zh', isChinese);
+    document.documentElement.lang = isChinese ? 'zh-Hant' : 'en';
+    toggle.setAttribute('aria-label', isChinese ? 'Switch to English' : '切換至中文版');
+    localStorage.setItem('language', language);
+  }
+
+  setLanguage(savedLanguage || (prefersChinese ? 'zh' : 'en'));
+  toggle.addEventListener('click', () => setLanguage(document.body.classList.contains('zh') ? 'en' : 'zh'));
+</script>
 </body>
 </html>
